@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Industrial Precision color palette */
+  --color-void: #0a0c10;
+  --color-carbon: #12151c;
+  --color-graphite: #1a1e28;
+  --color-steel: #252a36;
+  --color-slate: #3a4152;
+  --color-zinc: #5c6477;
+  --color-silver: #9aa3b8;
+  --color-chrome: #c5cdd8;
+  --color-white: #f0f2f5;
+
+  /* Electric accents */
+  --color-electric: #00d4ff;
+  --color-electric-dim: #00a8cc;
+  --color-electric-glow: rgba(0, 212, 255, 0.3);
+
+  /* Status colors */
+  --color-profit: #00e676;
+  --color-profit-dim: #00c853;
+  --color-profit-glow: rgba(0, 230, 118, 0.2);
+
+  --color-caution: #ffab00;
+  --color-caution-dim: #ff8f00;
+  --color-caution-glow: rgba(255, 171, 0, 0.2);
+
+  --color-danger: #ff5252;
+  --color-danger-dim: #ff1744;
+  --color-danger-glow: rgba(255, 82, 82, 0.2);
+
+  /* Typography */
+  --font-display: 'Archivo Black', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --font-body: 'Inter', -apple-system, sans-serif;
+}
+
+@font-face {
+  font-family: 'Archivo Black';
+  src: url('https://fonts.gstatic.com/s/archivoblack/v21/HTxqL89-PoGPr5cYD8u2FYPvew.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('https://fonts.gstatic.com/s/jetbrainsmono/v18/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmUsaaDhw.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-void);
+  color: var(--color-chrome);
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-void);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-carbon);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-slate);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-zinc);
+}
+
+/* Circuit board background pattern */
+.circuit-bg {
+  background-image:
+    linear-gradient(var(--color-graphite) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-graphite) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: -1px -1px;
+}
+
+/* Glowing effects */
+.glow-electric {
+  box-shadow: 0 0 20px var(--color-electric-glow), 0 0 40px var(--color-electric-glow);
+}
+
+.glow-profit {
+  box-shadow: 0 0 15px var(--color-profit-glow);
+}
+
+.glow-caution {
+  box-shadow: 0 0 15px var(--color-caution-glow);
+}
+
+.glow-danger {
+  box-shadow: 0 0 15px var(--color-danger-glow);
+}
+
+/* Animated gradient border */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.border-gradient {
+  --angle: 0deg;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--color-graphite), var(--color-graphite)) padding-box,
+    conic-gradient(from var(--angle), var(--color-electric), var(--color-electric-dim), var(--color-slate), var(--color-electric)) border-box;
+  animation: rotate-border 8s linear infinite;
+}
+
+@keyframes rotate-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Pulse animation for status indicators */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Data table striping */
+.table-row-alt:nth-child(even) {
+  background: var(--color-carbon);
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--color-electric);
+  color: var(--color-void);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-electric);
+  outline-offset: 2px;
+}
+
+/* Number formatting */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
